@@ -17,12 +17,11 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 
 # Construct file paths relative to the current directory
 file_paths = {
-    "members": os.path.join(current_directory, "data/members_v3.csv"),
-    "train": os.path.join(current_directory, "data/train_v2.csv"),
-    "transactions": os.path.join(current_directory, "data/transactions_v2.csv"),
-    "logs": os.path.join(current_directory, "data/user_logs_v2.csv")
+    "members": os.path.join(current_directory, "data/members_v3.csv.gz"),
+    "train": os.path.join(current_directory, "data/train_v2.csv.gz"),
+    "transactions": os.path.join(current_directory, "data/transactions_v2.csv.gz"),
+    "logs": os.path.join(current_directory, "data/user_logs_v2.csv.gz")
 }
-
 
 joined_data_frame = read.read_and_join_csv_files(file_paths)
 

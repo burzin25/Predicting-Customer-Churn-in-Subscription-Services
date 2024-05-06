@@ -16,6 +16,14 @@ def feature_engineering(data):
         pandas.DataFrame: The DataFrame with additional engineered features.
     '''
 
+    # Convert relevant columns to datetime type
+    data['registration_init_time'] = pd.to_datetime(data['registration_init_time'], format='%Y%m%d', errors='coerce')
+    data['membership_expire_date'] = pd.to_datetime(data['membership_expire_date'], format='%Y%m%d', errors='coerce')
+    data['date'] = pd.to_datetime(data['date'], format='%Y%m%d', errors='coerce')
+
+    # Drop rows with NaT values
+    data.dropna(subset=['registration_init_time', 'membership_expire_date', 'date'], inplace=True)
+
     # Extract year, month, and day from registration_init_time
     data['registration_year'] = data['registration_init_time'].dt.year
     data['registration_month'] = data['registration_init_time'].dt.month
@@ -40,6 +48,8 @@ def feature_engineering(data):
     data['skipped_ratio'] = (data['num_25'] + data['num_50']) / data['num_unq']
 
     return data
+
+
 
 
 def select_best_features(X, y, k=10, score_func=f_classif):
